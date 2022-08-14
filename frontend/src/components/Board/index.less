@@ -1,0 +1,27 @@
+.board {
+  overflow: hidden;
+
+  &-header {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    width: 100%;
+    padding: 0 50px;
+    justify-content: space-between;
+    background-color: @swatch_1;
+
+    span {
+      font-size: 18px;
+    }
+  }
+
+  &-content {
+    display: flex;
+    column-gap: 30px;
+    margin-top: 50px;
+    overflow: scroll;
+    padding: 20px 50px;
+    height: calc(100vh - 75px);
+    justify-content: space-between;
+  }
+}
