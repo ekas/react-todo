@@ -2,6 +2,7 @@
   overflow: hidden;
 
   &-header {
+    top: 0;
     display: flex;
     position: fixed;
     align-items: center;
@@ -17,11 +18,11 @@
 
   &-content {
     display: flex;
+    padding: 0 50px;
     column-gap: 30px;
-    margin-top: 50px;
     overflow: scroll;
-    padding: 20px 50px;
-    height: calc(100vh - 75px);
+    margin-top: 70px;
+    height: calc(100vh - 100px);
     justify-content: space-between;
   }
 }
