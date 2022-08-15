@@ -1,11 +1,11 @@
 import "./index.less";
 
-type BoardItemProps = {
+interface BoardItemProps {
   id: string;
   width?: string;
   cssClasses?: string;
   children: string;
-};
+}
 
 const Button = ({ width, children, cssClasses, id }: BoardItemProps) => {
   const buttonWidth = width ? ` ${width}px` : "";

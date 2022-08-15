@@ -1,11 +1,13 @@
 import { Item } from "../../models/item";
 import Button from "../Button";
+
 import "./index.less";
-type BoardItemProps = {
+
+interface BoardItemProps {
   items: Item[];
   heading: string;
   type: "todo" | "inprogress" | "completed";
-};
+}
 
 const BoardItem = ({ items, heading, type }: BoardItemProps) => {
   return (
