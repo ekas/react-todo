@@ -1,7 +1,7 @@
 .board-content-item {
   width: 100%;
   display: flex;
-  min-height: 10px;
+  overflow: hidden;
   padding: 10px 30px;
   margin-bottom: 20px;
   border-radius: 15px;
@@ -10,10 +10,6 @@
   -webkit-box-shadow: 10px 10px 22px -7px rgba(106, 167, 179, 0.63);
   -moz-box-shadow: 10px 10px 22px -7px rgba(106, 167, 179, 0.63);
   box-shadow: 10px 10px 22px -7px rgba(106, 167, 179, 0.63);
-
-  &:nth-of-type(1) {
-    min-height: 1000px;
-  }
 
   .item {
     &-header {
@@ -30,6 +26,12 @@
         color: rgb(@swatch_3);
         background-color: rgba(@swatch_3, 0.1);
       }
+    }
+
+    &-content {
+      height: 100%;
+      overflow: scroll;
+      margin: 20px 0 10px;
     }
   }
 }

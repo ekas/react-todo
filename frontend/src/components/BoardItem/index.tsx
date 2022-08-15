@@ -1,24 +1,31 @@
-import { Item } from "../../models/item";
+import { ReactElement } from "react";
 import Button from "../Button";
 
 import "./index.less";
 
 interface BoardItemProps {
-  items: Item[];
+  tasksLength: number;
   heading: string;
   type: "todo" | "inprogress" | "completed";
+  children?: ReactElement;
 }
 
-const BoardItem = ({ items, heading, type }: BoardItemProps) => {
+const BoardItem = ({
+  tasksLength = 0,
+  heading,
+  type,
+  children,
+}: BoardItemProps) => {
   return (
     <div className="board-content-item">
       <div className="item-header">
         <span>{heading}</span>
-        <span className="item-header-number">{items.length}</span>
+        <span className="item-header-number">{tasksLength}</span>
       </div>
       <Button cssClasses="item-add-button" id={`add-button-${type}`}>
         +
       </Button>
+      <div className="item-content">{children}</div>
     </div>
   );
 };

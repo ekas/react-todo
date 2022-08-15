@@ -16,6 +16,7 @@ module.exports = {
               "@swatch_5": "#787b85",
               "@swatch_6": "#2f3433",
               "@swatch_7": "#f04c0f",
+              "@swatch_8": "#fff",
             },
           },
         },

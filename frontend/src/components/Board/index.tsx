@@ -1,4 +1,5 @@
 import BoardItem from "../BoardItem";
+import TaskBlock from "../TaskBlock";
 import "./index.less";
 
 const Board = () => {
@@ -9,9 +10,28 @@ const Board = () => {
         <span>This week</span>
       </div>
       <div className="board-content">
-        <BoardItem items={[]} heading="To Do" type="todo" />
-        <BoardItem items={[]} heading="In Progress" type="inprogress" />
-        <BoardItem items={[]} heading="Completed" type="completed" />
+        <BoardItem tasksLength={0} heading="To Do" type="todo">
+          <>
+            <TaskBlock
+              mode="read"
+              task={{
+                id: 1,
+                title: "Task 1",
+                description: "Task 1 description",
+              }}
+            />
+          </>
+        </BoardItem>
+        <BoardItem
+          tasksLength={0}
+          heading="In Progress"
+          type="inprogress"
+        ></BoardItem>
+        <BoardItem
+          tasksLength={0}
+          heading="Completed"
+          type="completed"
+        ></BoardItem>
       </div>
     </div>
   );
