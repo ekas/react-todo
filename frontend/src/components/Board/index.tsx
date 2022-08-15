@@ -9,9 +9,9 @@ const Board = () => {
         <span>This week</span>
       </div>
       <div className="board-content">
-        <BoardItem items={[]} heading="To Do" />
-        <BoardItem items={[]} heading="In Progress" />
-        <BoardItem items={[]} heading="Completed" />
+        <BoardItem items={[]} heading="To Do" type="todo" />
+        <BoardItem items={[]} heading="In Progress" type="inprogress" />
+        <BoardItem items={[]} heading="Completed" type="completed" />
       </div>
     </div>
   );
