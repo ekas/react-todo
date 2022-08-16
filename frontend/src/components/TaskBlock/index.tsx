@@ -1,4 +1,9 @@
 import { useState } from "react";
+import {
+  DraggableProps,
+  DraggableProvidedDraggableProps,
+  DraggableProvidedDragHandleProps,
+} from "react-beautiful-dnd";
 import { Task } from "../../models/task";
 import Button from "../Button";
 import EditIcon from "././../../assets/edit.svg";
@@ -7,13 +12,29 @@ import "./index.less";
 interface TaskProps {
   mode: "edit" | "read";
   task: Task;
+  reference: React.LegacyRef<HTMLDivElement> | undefined;
+  style?: React.CSSProperties;
+  draggableProps?: DraggableProvidedDraggableProps;
+  dragHandleProps?: DraggableProvidedDragHandleProps;
 }
 
-const TaskBlock = ({ mode, task: { id, title, description } }: TaskProps) => {
+const TaskBlock = ({
+  mode,
+  style,
+  reference,
+  draggableProps,
+  dragHandleProps,
+  task: { id, title, description },
+}: TaskProps) => {
   const [isEditing, setIsEditing] = useState(mode === "edit" ? true : false);
   const [taskObj, setTaskObj] = useState({ id, title, description });
   return isEditing ? (
-    <div className="task">
+    <div
+      className="task"
+      ref={reference}
+      {...dragHandleProps}
+      {...draggableProps}
+    >
       <input
         type="text"
         className="task-title-input"
@@ -40,7 +61,12 @@ const TaskBlock = ({ mode, task: { id, title, description } }: TaskProps) => {
       </Button>
     </div>
   ) : (
-    <div className="task">
+    <div
+      className="task"
+      ref={reference}
+      {...dragHandleProps}
+      {...draggableProps}
+    >
       <div className="task-title">{taskObj.title}</div>
       <a
         href="/"
