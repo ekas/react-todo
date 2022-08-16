@@ -23,10 +23,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname + "/public/index.html"));
-});
-
 app.get("/api/tasks", function (req, res) {
   res.json(tasks);
 });
@@ -70,6 +66,6 @@ app.delete("/api/tasks/:id", function (req, res) {
   res.status(204).send();
 });
 
-app.listen(3000, function () {
-  console.log("To-Do app listening on port 3000!");
+app.listen(4000, function () {
+  console.log("To-Do app listening on port 4000!");
 });
