@@ -3,19 +3,19 @@ import Button from "../Button";
 
 import "./index.less";
 
-interface BoardItemProps {
+interface BoardColumnProps {
   tasksLength: number;
   heading: string;
   type: "todo" | "inprogress" | "completed";
   children?: ReactElement;
 }
 
-const BoardItem = ({
+const BoardColumn = ({
   tasksLength = 0,
   heading,
   type,
   children,
-}: BoardItemProps) => {
+}: BoardColumnProps) => {
   return (
     <div className="board-content-item">
       <div className="item-header">
@@ -30,4 +30,4 @@ const BoardItem = ({
   );
 };
 
-export default BoardItem;
+export default BoardColumn;
