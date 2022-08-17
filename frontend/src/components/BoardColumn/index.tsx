@@ -11,6 +11,7 @@ interface BoardColumnProps {
   reference: React.LegacyRef<HTMLDivElement> | undefined;
   style?: React.CSSProperties;
   props?: DroppableProvidedProps;
+  showAddButton?: boolean;
 }
 
 const BoardColumn = ({
@@ -21,6 +22,7 @@ const BoardColumn = ({
   reference,
   style,
   props,
+  showAddButton = false,
 }: BoardColumnProps) => {
   return (
     <div
@@ -33,9 +35,11 @@ const BoardColumn = ({
         <span>{heading}</span>
         <span className="item-header-number">{tasksLength}</span>
       </div>
-      <Button cssClasses="item-add-button" id={`add-button-${type}`}>
-        +
-      </Button>
+      {showAddButton && (
+        <Button cssClasses="item-add-button" id={`add-button-${type}`}>
+          +
+        </Button>
+      )}
       <div className="item-content">{children}</div>
     </div>
   );

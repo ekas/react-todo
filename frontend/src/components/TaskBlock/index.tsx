@@ -12,10 +12,10 @@ import "./index.less";
 interface TaskProps {
   mode: "edit" | "read";
   task: Task;
-  reference: React.LegacyRef<HTMLDivElement> | undefined;
   style?: React.CSSProperties;
   draggableProps?: DraggableProvidedDraggableProps;
   dragHandleProps?: DraggableProvidedDragHandleProps;
+  reference: React.LegacyRef<HTMLDivElement> | undefined;
 }
 
 const TaskBlock = ({
@@ -67,7 +67,9 @@ const TaskBlock = ({
       {...dragHandleProps}
       {...draggableProps}
     >
-      <div className="task-title">{taskObj.title}</div>
+      <div className="task-title" title={taskObj.title}>
+        {taskObj.title}
+      </div>
       <a
         href="/"
         title="Edit Task"

@@ -8,11 +8,15 @@
   background-color: rgba(@swatch_8, 0.7);
 
   &-title {
+    width: 90%;
     font-size: 20px;
-    letter-spacing: 0.5px;
+    overflow: hidden;
     line-height: 20px;
+    letter-spacing: 0.5px;
     color: rgb(@swatch_4);
     margin-bottom: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     &-input {
       width: 100%;
