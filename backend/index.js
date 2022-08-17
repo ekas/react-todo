@@ -4,32 +4,32 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var uuid = require("uuid");
 
-var tasks = [
-  {
+var tasks = {
+  [uuid.v4()]: {
     id: uuid.v4(),
     title: "Task 1",
     status: "todo",
     description: "Read description of programming challenge",
   },
-  {
+  [uuid.v4()]: {
     id: uuid.v4(),
     title: "Task 2",
     status: "todo",
     description: "Implement awesome web app",
   },
-  {
+  [uuid.v4()]: {
     id: uuid.v4(),
     title: "Task 3",
     status: "completed",
     description: "Polish project",
   },
-  {
+  [uuid.v4()]: {
     id: uuid.v4(),
     title: "Task 4",
     status: "inprogress",
     description: "Send solution to LogMeIn",
   },
-];
+};
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
@@ -41,11 +41,12 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
+  res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
   next();
 });
 
 app.get("/api/tasks", function (req, res) {
-  res.json(tasks);
+  res.json(Object.keys(tasks).map((key) => tasks[key]));
 });
 
 app.post("/api/tasks", function (req, res) {
@@ -57,11 +58,13 @@ app.post("/api/tasks", function (req, res) {
     !req.body.title ||
     !req.body.status
   ) {
-    res.status(400).send("Invalid task format");
+    res.statusMessage = "Invalid task format";
+    res.status(400).send();
     return;
   }
   if (tasks[req.body.id]) {
-    res.status(409).send("Conflict. Task already defined");
+    res.statusMessage = "Conflict. Task already defined";
+    res.status(409).send();
     return;
   }
 
@@ -71,6 +74,7 @@ app.post("/api/tasks", function (req, res) {
     status: req.body.status,
     description: req.body.description,
   };
+  res.statusMessage = "New Task Added";
   res.status(204).send();
 });
 
@@ -78,6 +82,7 @@ app.put("/api/tasks/:id", function (req, res) {
   console.log("PUT a new Task", req.params.id, req.body);
 
   if (!tasks[req.params.id]) {
+    res.statusMessage = "Task Not Found";
     res.status(404).send();
     return;
   }
@@ -89,16 +94,19 @@ app.put("/api/tasks/:id", function (req, res) {
     status: status,
     description: description,
   };
+  res.statusMessage = "Task Updated";
   res.status(204).send();
 });
 
 app.delete("/api/tasks/:id", function (req, res) {
   if (!tasks[req.params.id]) {
+    res.statusMessage = "Task Not Found";
     res.status(404).send();
     return;
   }
 
   delete tasks[req.params.id];
+  res.statusMessage = "Task Deleted";
   res.status(204).send();
 });
 
