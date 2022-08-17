@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { Task } from "../models/task";
 import { TaskColumn } from "../models/taskColumn";
+import { deleteTask } from "../services/tasks.service";
 
 export const updateColumnswithTasks = (
   tasks: Task[],
@@ -23,4 +24,22 @@ export const updateColumnswithTasks = (
     },
   };
   setColumns(columnsWithTasks);
+};
+
+export const columnJSON: TaskColumn = {
+  todo: {
+    name: "To Do",
+    type: "todo",
+    tasks: [],
+  },
+  inprogress: {
+    name: "In Progress",
+    type: "inprogress",
+    tasks: [],
+  },
+  completed: {
+    name: "Completed",
+    type: "completed",
+    tasks: [],
+  },
 };

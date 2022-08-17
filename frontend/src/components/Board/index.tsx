@@ -1,34 +1,20 @@
-import BoardColumn from "../BoardColumn";
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import TaskBlock from "../TaskBlock";
+import BoardColumn from "../BoardColumn";
+import { onDragEnd } from "../../helpers/onDragHelper";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { deleteTask, getAllTasks } from "../../services/tasks.service";
+import { columnJSON, updateColumnswithTasks } from "../../helpers/boardHelper";
+
+import { Task } from "../../models/task";
+import { TaskColumn } from "../../models/taskColumn";
 
 import "./index.less";
-import { useEffect, useState } from "react";
-import { Task } from "../../models/task";
-import { getAllTasks } from "../../services/tasks.service";
-import { TaskColumn } from "../../models/taskColumn";
-import { onDragEnd } from "../../helpers/onDragHelper";
-import { updateColumnswithTasks } from "../../helpers/boardHelper";
 
 const Board = () => {
   const [tasks, setTasks] = useState<Task[]>();
-  const [columns, setColumns] = useState<TaskColumn>({
-    todo: {
-      name: "To Do",
-      type: "todo",
-      tasks: [],
-    },
-    inprogress: {
-      name: "In Progress",
-      type: "inprogress",
-      tasks: [],
-    },
-    completed: {
-      name: "Completed",
-      type: "completed",
-      tasks: [],
-    },
-  });
+  const [columns, setColumns] = useState<TaskColumn>(columnJSON);
 
   useEffect(() => {
     getAllTasks()
@@ -43,6 +29,19 @@ const Board = () => {
       updateColumnswithTasks(tasks, columns, setColumns);
     }
   }, [tasks]);
+
+  const deleteTaskAction = (id: string) => {
+    if (id) {
+      deleteTask(id)
+        .then((msg) => {
+          console.log(msg);
+          tasks && setTasks(tasks.filter((task) => task.id !== id));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
 
   return (
     <div className="board">
@@ -64,6 +63,7 @@ const Board = () => {
                       heading={column.name}
                       tasksLength={column.tasks.length}
                       type={column.type}
+                      showAddButton={column.type === "todo"}
                       style={{
                         backgroundColor: snapshot.isDraggingOver
                           ? "lightblue"
@@ -83,11 +83,9 @@ const Board = () => {
                                 <TaskBlock
                                   mode="read"
                                   task={task}
+                                  deleteTaskAction={deleteTaskAction}
                                   style={{
                                     userSelect: "none",
-                                    backgroundColor: snapshot.isDragging
-                                      ? "#263B4A"
-                                      : "",
                                     ...provided.draggableProps.style,
                                   }}
                                   reference={provided.innerRef}
