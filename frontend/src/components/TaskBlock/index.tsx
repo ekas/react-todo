@@ -7,6 +7,7 @@ import {
 import { Task } from "../../models/task";
 import Button from "../Button";
 import EditIcon from "././../../assets/edit.svg";
+import DeleteIcon from "././../../assets/delete.svg";
 import "./index.less";
 
 interface TaskProps {
@@ -16,6 +17,7 @@ interface TaskProps {
   draggableProps?: DraggableProvidedDraggableProps;
   dragHandleProps?: DraggableProvidedDragHandleProps;
   reference: React.LegacyRef<HTMLDivElement> | undefined;
+  deleteTaskAction: (id: string) => void;
 }
 
 const TaskBlock = ({
@@ -24,16 +26,22 @@ const TaskBlock = ({
   reference,
   draggableProps,
   dragHandleProps,
+  deleteTaskAction,
   task: { id, title, description },
 }: TaskProps) => {
   const [isEditing, setIsEditing] = useState(mode === "edit" ? true : false);
-  const [taskObj, setTaskObj] = useState({ id, title, description });
+  const [taskObj, setTaskObj] = useState({
+    id,
+    title,
+    description,
+  });
   return isEditing ? (
     <div
       className="task"
       ref={reference}
       {...dragHandleProps}
       {...draggableProps}
+      style={{ ...style }}
     >
       <input
         type="text"
@@ -71,7 +79,6 @@ const TaskBlock = ({
         {taskObj.title}
       </div>
       <a
-        href="/"
         title="Edit Task"
         onClick={(e) => {
           e.preventDefault();
@@ -79,6 +86,15 @@ const TaskBlock = ({
         }}
       >
         <img src={EditIcon} alt="Task Edit" className="task-edit" />
+      </a>
+      <a
+        title="Delete Task"
+        onClick={(e) => {
+          e.preventDefault();
+          deleteTaskAction(taskObj.id);
+        }}
+      >
+        <img src={DeleteIcon} alt="Delete Task" className="task-delete" />
       </a>
       <div className="task-description">{taskObj.description}</div>
     </div>

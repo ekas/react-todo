@@ -63,10 +63,27 @@
     width: 30px;
     right: 0;
     padding: 5px;
+    cursor: pointer;
     margin-left: 20px;
     position: absolute;
-    border-radius: 5px;
-    fill: rgb(@swatch_7);
-    background-color: rgba(@swatch_3, 0.2);
+    background-color: rgba(@swatch_3, 0.1);
+
+    &:hover {
+      background-color: rgba(@swatch_3, 0.3);
+    }
+  }
+
+  &-delete {
+    top: 0;
+    width: 30px;
+    right: 30px;
+    padding: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+    position: absolute;
+
+    &:hover {
+      background-color: rgba(@swatch_3, 0.3);
+    }
   }
 }

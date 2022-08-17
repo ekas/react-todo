@@ -4,27 +4,29 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var uuid = require("uuid");
 
+var ids = [uuid.v4(), uuid.v4(), uuid.v4(), uuid.v4()];
+
 var tasks = {
-  [uuid.v4()]: {
-    id: uuid.v4(),
+  [ids[0]]: {
+    id: ids[0],
     title: "Task 1",
     status: "todo",
     description: "Read description of programming challenge",
   },
-  [uuid.v4()]: {
-    id: uuid.v4(),
+  [ids[1]]: {
+    id: ids[1],
     title: "Task 2",
     status: "todo",
     description: "Implement awesome web app",
   },
-  [uuid.v4()]: {
-    id: uuid.v4(),
+  [ids[2]]: {
+    id: ids[2],
     title: "Task 3",
     status: "completed",
     description: "Polish project",
   },
-  [uuid.v4()]: {
-    id: uuid.v4(),
+  [ids[3]]: {
+    id: ids[3],
     title: "Task 4",
     status: "inprogress",
     description: "Send solution to LogMeIn",
