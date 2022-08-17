@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import TaskBlock from "../TaskBlock";
 import BoardColumn from "../BoardColumn";
 import { onDragEnd } from "../../helpers/onDragHelper";
@@ -54,7 +53,7 @@ const Board = () => {
         addNewTask(task)
           .then((msg) => {
             console.log(msg);
-            tasks ? setTasks([...tasks, task]) : setTasks([task]);
+            tasks ? setTasks([task, ...tasks]) : setTasks([task]);
           })
           .catch((error) => {
             console.error(error);
@@ -104,6 +103,7 @@ const Board = () => {
                       tasksLength={column.tasks.length}
                       type={column.type}
                       showAddButton={column.type === "todo"}
+                      addUpdateTaskAction={addUpdateTaskAction}
                       style={{
                         backgroundColor: snapshot.isDraggingOver
                           ? "lightblue"

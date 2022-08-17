@@ -1,4 +1,6 @@
 import { DroppableProvidedProps } from "react-beautiful-dnd";
+import { addTaskJSON } from "../../helpers/boardHelper";
+import { Task } from "../../models/task";
 import Button from "../Button";
 
 import "./index.less";
@@ -12,6 +14,7 @@ interface BoardColumnProps {
   style?: React.CSSProperties;
   props?: DroppableProvidedProps;
   showAddButton?: boolean;
+  addUpdateTaskAction: (task: Task, type: "ADD" | "UPDATE") => void;
 }
 
 const BoardColumn = ({
@@ -23,6 +26,7 @@ const BoardColumn = ({
   style,
   props,
   showAddButton = false,
+  addUpdateTaskAction,
 }: BoardColumnProps) => {
   return (
     <div
@@ -36,7 +40,13 @@ const BoardColumn = ({
         <span className="item-header-number">{tasksLength}</span>
       </div>
       {showAddButton && (
-        <Button cssClasses="item-add-button" id={`add-button-${type}`}>
+        <Button
+          cssClasses="item-add-button"
+          id={`add-button-${type}`}
+          onClick={() => {
+            addUpdateTaskAction(addTaskJSON, "ADD");
+          }}
+        >
           +
         </Button>
       )}

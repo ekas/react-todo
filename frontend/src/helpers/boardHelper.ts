@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { Task } from "../models/task";
 import { TaskColumn } from "../models/taskColumn";
-import { deleteTask } from "../services/tasks.service";
+import { v4 as uuidv4 } from "uuid";
 
 export const updateColumnswithTasks = (
   tasks: Task[],
@@ -42,4 +42,11 @@ export const columnJSON: TaskColumn = {
     type: "completed",
     tasks: [],
   },
+};
+
+export const addTaskJSON: Task = {
+  id: uuidv4(),
+  title: "New Task",
+  description: "Add your description here",
+  status: "todo",
 };
