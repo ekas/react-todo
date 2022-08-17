@@ -18,6 +18,7 @@ interface TaskProps {
   dragHandleProps?: DraggableProvidedDragHandleProps;
   reference: React.LegacyRef<HTMLDivElement> | undefined;
   deleteTaskAction: (id: string) => void;
+  addUpdateTaskAction: (task: Task, type: "ADD" | "UPDATE") => void;
 }
 
 const TaskBlock = ({
@@ -27,13 +28,15 @@ const TaskBlock = ({
   draggableProps,
   dragHandleProps,
   deleteTaskAction,
-  task: { id, title, description },
+  addUpdateTaskAction,
+  task: { id, title, description, status },
 }: TaskProps) => {
   const [isEditing, setIsEditing] = useState(mode === "edit" ? true : false);
-  const [taskObj, setTaskObj] = useState({
+  const [taskObj, setTaskObj] = useState<Task>({
     id,
     title,
     description,
+    status,
   });
   return isEditing ? (
     <div
@@ -46,14 +49,16 @@ const TaskBlock = ({
       <input
         type="text"
         className="task-title-input"
+        id={`${id}-title`}
+        required
         value={taskObj.title}
         onChange={(e) => setTaskObj({ ...taskObj, title: e.target.value })}
         placeholder="Enter Task Title"
       />
       <textarea
-        name=""
-        id=""
+        id={`${id}-description`}
         className="task-description-input"
+        required
         placeholder="Enter Task Description"
         onChange={(e) =>
           setTaskObj({ ...taskObj, description: e.target.value })
@@ -63,7 +68,10 @@ const TaskBlock = ({
       <Button
         cssClasses="item-save-button"
         id={`save-button-${id}`}
-        onClick={() => setIsEditing(false)}
+        onClick={() => {
+          addUpdateTaskAction(taskObj, "UPDATE");
+          setIsEditing(false);
+        }}
       >
         Save Task
       </Button>
