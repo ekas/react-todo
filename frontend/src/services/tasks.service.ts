@@ -8,3 +8,46 @@ export const getAllTasks = async (): Promise<Task[]> => {
     return response.json();
   });
 };
+
+export const addNewTask = async (task: Task): Promise<string> => {
+  return fetch(`${process.env.REACT_APP_API_URL}/tasks`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(task),
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.statusText;
+  });
+};
+
+export const updateTask = async (task: Task): Promise<string> => {
+  return fetch(`${process.env.REACT_APP_API_URL}/tasks/${task.id}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(task),
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.statusText;
+  });
+};
+
+export const deleteTask = async (taskId: Task["id"]): Promise<string> => {
+  return fetch(`${process.env.REACT_APP_API_URL}/tasks/${taskId}`, {
+    method: "DELETE",
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.statusText;
+  });
+};
