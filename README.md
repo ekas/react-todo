@@ -56,21 +56,27 @@ yarn start
 
 This will run a local backend instance of the application `http://localhost:4000/`. If you change the backend port don't forget to update the `.env` file in the frontend folder
 
-![Img 1]()
+![Img 1](https://github.com/ekas/react-todo/blob/main/screenshots/image1.png)
 
 ## Project Features
 
-- Event Calendar design is made super easy for the user is easily grab all the required information for the upcoming events or meetups.
-- Even user has a choice to click on the event and could apply for it. For other more information user could visit to event page as well.
+- Simple TODO app.
+- Add New Tasks, Update & Delete Tasks.
+- Move Tasks to different Stages like `In Progress` and `Completed`.
+- On Refresh, data changes persist.
 
 ## Project Screenshots
 
-![Img 2]()
+![Img 2](https://github.com/ekas/react-todo/blob/main/screenshots/image2.png)
 
-![Img 3]()
+![Img 3](https://github.com/ekas/react-todo/blob/main/screenshots/image3.png)
 
-![Img 4]()
+![Img 4](https://github.com/ekas/react-todo/blob/main/screenshots/image4.png)
 
-![Img 5]()
+![Img 5](https://github.com/ekas/react-todo/blob/main/screenshots/image5.png)
+
+![Img 6](https://github.com/ekas/react-todo/blob/main/screenshots/image6.png)
+
+![Img 7](https://github.com/ekas/react-todo/blob/main/screenshots/image7.png)
 
 ## Thank You
