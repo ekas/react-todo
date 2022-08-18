@@ -73,6 +73,7 @@ const Board = () => {
                 {(provided, snapshot) => {
                   return (
                     <BoardColumn
+                      id={columnId}
                       reference={provided.innerRef}
                       heading={column.name}
                       tasksLength={column.tasks.length}

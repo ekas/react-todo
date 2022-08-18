@@ -6,6 +6,7 @@ import Button from "../Button";
 import "./index.less";
 
 interface BoardColumnProps {
+  id: string;
   tasksLength: number;
   heading: string;
   type: "todo" | "inprogress" | "completed";
@@ -18,6 +19,7 @@ interface BoardColumnProps {
 }
 
 const BoardColumn = ({
+  id,
   tasksLength = 0,
   heading,
   type,
@@ -31,6 +33,7 @@ const BoardColumn = ({
   return (
     <div
       className="board-content-item"
+      data-cy={`board-content-item-${id}`}
       ref={reference}
       style={style}
       {...props}

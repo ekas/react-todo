@@ -48,12 +48,14 @@ const TaskBlock = ({
       ref={reference}
       {...dragHandleProps}
       {...draggableProps}
+      data-cy={`task-${id}`}
       style={{ ...style }}
     >
       <input
         type="text"
         className="task-title-input"
         id={`${id}-title`}
+        data-cy="task-edit-input"
         required
         value={taskObj.title}
         onChange={(e) => setTaskObj({ ...taskObj, title: e.target.value })}
@@ -65,6 +67,7 @@ const TaskBlock = ({
 
       <textarea
         id={`${id}-description`}
+        data-cy="task-edit-textarea"
         className="task-description-input"
         required
         placeholder="Enter Task Description"
@@ -80,6 +83,7 @@ const TaskBlock = ({
       <Button
         cssClasses="item-save-button"
         id={`save-button-${id}`}
+        dataCy="task-edit-save"
         onClick={() => {
           const { title, description } = taskObj;
           if (title.length > 0 && description.length > 0) {
@@ -112,6 +116,7 @@ const TaskBlock = ({
   ) : (
     <div
       className="task"
+      data-cy={`task-${id}`}
       ref={reference}
       {...dragHandleProps}
       {...draggableProps}
