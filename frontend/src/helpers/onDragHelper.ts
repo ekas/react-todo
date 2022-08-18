@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { DropResult } from "react-beautiful-dnd";
+import { toast } from "react-toastify";
 import { Task } from "../models/task";
 import { TaskColumn } from "../models/taskColumn";
 import { updateTaskOrder } from "../services/tasks.service";
@@ -60,10 +61,8 @@ export const onDragEnd = (
 
   setTasks(newTasks);
   updateTaskOrder(newTasks)
-    .then((msg) => {
-      console.log(msg);
-    })
+    .then()
     .catch((error) => {
-      console.error(error);
+      toast.error(error);
     });
 };

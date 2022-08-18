@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { toast } from "react-toastify";
 import { Task } from "../models/task";
 import { TaskColumn } from "../models/taskColumn";
 import { v4 as uuidv4 } from "uuid";
@@ -36,16 +37,16 @@ export const addUpdateTaskActionHelper = (
   if (type === "ADD") {
     addNewTask(task)
       .then((msg) => {
-        console.log(msg);
+        toast.success(msg);
         tasksState ? setTasks([task, ...tasksState]) : setTasks([task]);
       })
       .catch((error) => {
-        console.error(error);
+        toast.error(error);
       });
   } else {
     updateTask(task)
       .then((msg) => {
-        console.log(msg);
+        toast.success(msg);
         if (tasksState) {
           setTasks(
             tasksState.map((t) => {
@@ -60,7 +61,7 @@ export const addUpdateTaskActionHelper = (
         }
       })
       .catch((error) => {
-        console.error(error);
+        toast.error(error);
       });
   }
 };

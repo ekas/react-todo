@@ -14,6 +14,7 @@ import { Task } from "../../models/task";
 import { TaskColumn } from "../../models/taskColumn";
 
 import "./index.less";
+import { toast } from "react-toastify";
 
 const Board = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -21,9 +22,12 @@ const Board = () => {
 
   useEffect(() => {
     getAllTasks()
-      .then((tasks) => setTasks(tasks))
+      .then((tasks) => {
+        toast.success("Tasks loaded successfully");
+        setTasks(tasks);
+      })
       .catch((error) => {
-        console.error(error);
+        toast.error(error.message);
       });
   }, []);
 
@@ -38,11 +42,11 @@ const Board = () => {
     if (id) {
       deleteTask(id)
         .then((msg) => {
-          console.log(msg);
+          toast.success(msg);
           tasks && setTasks(tasks.filter((task) => task.id !== id));
         })
         .catch((error) => {
-          console.error(error);
+          toast.error(error);
         });
     }
   };
