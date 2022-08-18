@@ -4,7 +4,7 @@ Project is build using the create-react-app cli and being deployed over [Vercel]
 
 [Demo](https://react-todo-frontend.vercel.app/) is also available
 
-## Project Build Instructions
+## Project Local Build Instructions
 
 Make sure you've [`git`](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [`yarn`](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) & [`nodejs`](https://nodejs.org/en/) installed in your system.
 
@@ -55,6 +55,27 @@ yarn start
 ```
 
 This will run a local backend instance of the application `http://localhost:4000/`. If you change the backend port don't forget to update the `.env` file in the frontend folder
+
+## Project e2e test Instructions
+
+- Step 1: Restart both frontend and backend servers as per instructions in above sections.
+- Step 2: After that open another terminal.
+
+```bash
+cd frontend/
+yarn run cy:run
+```
+
+- Step 3: For Visual e2e test.
+
+```bash
+cd frontend/
+yarn cypress open
+```
+
+- Step 4: Click on `E2E Testing` and then chose a browser and click on start E2E testing button.
+
+- Step 4: Another chrome will load with list containing tests `todoBoard.cy.js`. Click on it to run tests.
 
 ![Img 1](https://github.com/ekas/react-todo/blob/main/screenshots/image1.png)
 
