@@ -100,4 +100,6 @@ yarn cypress open
 
 ![Img 7](https://github.com/ekas/react-todo/blob/main/screenshots/image7.png)
 
+![E2E GIF](https://github.com/ekas/react-todo/blob/main/screenshots/e2e_test.gif)
+
 ## Thank You
