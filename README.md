@@ -1,216 +1,74 @@
-# Coding Challenge: To-Do List
+# React TODO
 
-### Objective
-Create a single page web application to manage a task list using React.
+Project is build using the create-react-app cli and being deployed over [Vercel](https://vercel.com/)
 
-### Requirements
-The application provides the functionality to view the list of to-do items, create them, and mark them as done. The front-end technology is based on JavaScript (or TypeScript) / HTML / CSS. Tasks are stored using a Rest service. Please realize data transfer between web client and back-end
-service.
+[Demo](https://react-todo-frontend.vercel.app/) is also available
 
-#### Keep in mind
-Which decisions would you make if you would develop this app in a large team?  
+## Project Build Instructions
 
-- How would you structure your code? 
-- Which technology decisions would you make? 
-- How would you approach testing?
+Make sure you've [`git`](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [`yarn`](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) & [`nodejs`](https://nodejs.org/en/) installed in your system.
 
-### Additional Information
-The server-side implementation is provided and implemented based on Node.js. The API is documented below. Please deliver an appealing, well-crafted and creative solution. You are free to extend the feature set.
+Open terminal and follow these steps;
 
-**Don't forget to polish your user interface with your flavor of CSS.**
-
---------------------------------------------------------
-
-# Back-end Service
-
-## Overview
-
-The back-end is based on [Express](http://http://expressjs.com/), a Node.js web application framework.
-
-
-## Setup
-
-To setup the server install Node.js in Version 12.18.3 or newer from the [Node.Js Website](http://nodejs.org/).
-Then run the following command in the project root.
-This downloads all required dependencies to run the Server.
+- Step 1: Clone the repo.
 
 ```bash
-npm install
+git clone https://github.com/ekas/react-todo
 ```
 
-## Run the Server
-
-Run the following command in the project root:
+You should now see a `react-todo` folder in your present working directory. Let's change directory to it.
 
 ```bash
-npm start
+cd react-todo/
 ```
 
-## Server Interface Description
-
-### Get index.html
-
-This is the main entry point, the server delivers the index.html file which is located in the project's public folder.
-Static files in public are served as well.
-
-    GET /
-
-#### Curl example
+- Step 2: Frontend Build Instructions. Install dependencies.
 
 ```bash
-curl http://localhost:3000/
+cd frontend/
+yarn install
 ```
 
-#### Response
+This will use `yarn` to install project dependencies.
 
-    HTTP/1.1 200 OK
-    X-Powered-By: Express
-    Access-Control-Allow-Origin: *
-    Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
-    Content-Type: application/json; charset=utf-8
-    Content-Length: 43
-    Date: Tue, 11 Oct 2016 09:52:06 GMT
-    Connection: keep-alive
-
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Todo App</title>
-    </head>
-    <body>
-      <h1>Todo App</h1>
-
-      TODO: build app
-    </body>
-    </html>
-
-- - -
-
-
-### Get a list of Tasks
-
-This Method retrieves the list of tasks that the server currently knows about.
-Restarting the server will reset the tasks since it is using an in memory storage solution.
-
-    GET /api/tasks
-
-#### Response
-
-    HTTP/1.1 200 OK
-    X-Powered-By: Express
-    Access-Control-Allow-Origin: *
-    Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
-    Content-Type: application/json; charset=utf-8
-    Content-Length: 43
-    Date: Tue, 11 Oct 2016 09:52:06 GMT
-    Connection: keep-alive
-
-    {
-      "1": { "id": '1', "text": "Read description of programming challenge" },
-      "2": { "id": "2", "text": "Implement an awesome web app" },
-      "3": { "id": "3", "text": "Polish project" },
-      "9": { "id": "9", "text": "Send solution to GoTo" }
-    }
-
-#### Curl example
+- Step 3: Start the frontend project.
 
 ```bash
-curl http://localhost:3000/api/tasks
+yarn start
 ```
 
+This will run a local instance of the application `http://localhost:3000/`
 
-- - -
+- Step 4: BAckend Build Instructions. Install dependencies.
 
-
-### Create a new Task
-
-This will save the new task in the in memory storage.
-
-    POST /api/tasks
-
-#### Parameters
-
-| Name | Type   | Description                         |
-|------|--------|-------------------------------------|
-| id   | string | the id of the tasks, must be unique |
-| text | string | the text of the tasks               |
-
-#### Response
-
-    HTTP/1.1 204 No Content
-    X-Powered-By: Express
-    Access-Control-Allow-Origin: *
-    Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
-    Date: Tue, 11 Oct 2016 09:47:41 GMT
-    Connection: keep-alive
-
-#### Curl example
+Open a new terminal and enter following command.
 
 ```bash
-curl -i \
-    -H "Content-Type: application/json" \
-    -X POST \
-     -d '{"id":"001","text":"my great task"}' \
-    http://localhost:3000/api/tasks
+cd backend/
+yarn install
 ```
 
-
-- - -
-
-
-### Update a Task
-
-This will update the task in the in memory storage.
-
-    PUT /api/tasks/:id
-
-#### Parameters
-
-| Name | Type   | Description               |
-|------|--------|---------------------------|
-| text | string | the new text of the tasks |
-
-#### Response
-
-    HTTP/1.1 204 No Content
-    X-Powered-By: Express
-    Access-Control-Allow-Origin: *
-    Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
-    Date: Tue, 11 Oct 2016 09:52:06 GMT
-    Connection: keep-alive
-
-#### Curl example
+- Step 4: Start the backend project.
 
 ```bash
-curl -i \
-    -H "Content-Type: application/json" \
-    -X PUT \
-     -d '{"id":"001","text":"my great new task"}' \
-    http://localhost:3000/api/tasks/001
+yarn start
 ```
 
+![Img 1]()
 
-- - -
+## Project Features
 
+- Event Calendar design is made super easy for the user is easily grab all the required information for the upcoming events or meetups.
+- Even user has a choice to click on the event and could apply for it. For other more information user could visit to event page as well.
 
-### Delete a Task
+## Project Screenshots
 
-This method will delete the task in the in memory storage.
+![Img 2]()
 
-    DELETE /api/tasks/:id
+![Img 3]()
 
-#### Response
+![Img 4]()
 
-    HTTP/1.1 204 No Content
-    X-Powered-By: Express
-    Access-Control-Allow-Origin: *
-    Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
-    Date: Tue, 11 Oct 2016 09:52:49 GMT
-    Connection: keep-alive
+![Img 5]()
 
-#### Curl example
-
-```bash
-curl -i -X DELETE http://localhost:3000/api/tasks/001
-```
+## Thank You
