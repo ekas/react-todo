@@ -54,6 +54,8 @@ yarn install
 yarn start
 ```
 
+This will run a local backend instance of the application `http://localhost:4000/`. If you change the backend port don't forget to update the `.env` file in the frontend folder
+
 ![Img 1]()
 
 ## Project Features
