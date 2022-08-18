@@ -3,13 +3,12 @@ import TaskBlock from "../TaskBlock";
 import BoardColumn from "../BoardColumn";
 import { onDragEnd } from "../../helpers/onDragHelper";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { deleteTask, getAllTasks } from "../../services/tasks.service";
 import {
-  addNewTask,
-  deleteTask,
-  getAllTasks,
-  updateTask,
-} from "../../services/tasks.service";
-import { columnJSON, updateColumnswithTasks } from "../../helpers/boardHelper";
+  addUpdateTaskActionHelper,
+  columnJSON,
+  updateColumnswithTasks,
+} from "../../helpers/boardHelper";
 
 import { Task } from "../../models/task";
 import { TaskColumn } from "../../models/taskColumn";
@@ -17,7 +16,7 @@ import { TaskColumn } from "../../models/taskColumn";
 import "./index.less";
 
 const Board = () => {
-  const [tasks, setTasks] = useState<Task[]>();
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [columns, setColumns] = useState<TaskColumn>(columnJSON);
 
   useEffect(() => {
@@ -49,36 +48,7 @@ const Board = () => {
 
   const addUpdateTaskAction = (task: Task, type: "ADD" | "UPDATE") => {
     if (task) {
-      if (type === "ADD") {
-        addNewTask(task)
-          .then((msg) => {
-            console.log(msg);
-            tasks ? setTasks([task, ...tasks]) : setTasks([task]);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      } else {
-        updateTask(task)
-          .then((msg) => {
-            console.log(msg);
-            if (tasks) {
-              setTasks(
-                tasks.map((t) => {
-                  if (t.id === task.id) {
-                    t.title = task.title;
-                    t.description = task.description;
-                    t.status = task.status;
-                  }
-                  return t;
-                })
-              );
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
+      addUpdateTaskActionHelper(task, tasks, setTasks, type);
     }
   };
 
@@ -90,7 +60,7 @@ const Board = () => {
       </div>
       <div className="board-content">
         <DragDropContext
-          onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+          onDragEnd={(result) => onDragEnd(result, columns, setTasks)}
         >
           {Object.entries(columns).map(([columnId, column], index) => {
             return (

@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Task } from "../models/task";
 import { TaskColumn } from "../models/taskColumn";
 import { v4 as uuidv4 } from "uuid";
+import { addNewTask, updateTask } from "../services/tasks.service";
 
 export const updateColumnswithTasks = (
   tasks: Task[],
@@ -24,6 +25,44 @@ export const updateColumnswithTasks = (
     },
   };
   setColumns(columnsWithTasks);
+};
+
+export const addUpdateTaskActionHelper = (
+  task: Task,
+  tasksState: Task[],
+  setTasks: Dispatch<SetStateAction<Task[]>>,
+  type: "ADD" | "UPDATE"
+) => {
+  if (type === "ADD") {
+    addNewTask(task)
+      .then((msg) => {
+        console.log(msg);
+        tasksState ? setTasks([task, ...tasksState]) : setTasks([task]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    updateTask(task)
+      .then((msg) => {
+        console.log(msg);
+        if (tasksState) {
+          setTasks(
+            tasksState.map((t) => {
+              if (t.id === task.id) {
+                t.title = task.title;
+                t.description = task.description;
+                t.status = task.status;
+              }
+              return t;
+            })
+          );
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 };
 
 export const columnJSON: TaskColumn = {

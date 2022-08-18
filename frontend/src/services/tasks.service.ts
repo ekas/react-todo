@@ -51,3 +51,19 @@ export const deleteTask = async (taskId: Task["id"]): Promise<string> => {
     return response.statusText;
   });
 };
+
+export const updateTaskOrder = async (task: Task[]): Promise<string> => {
+  return fetch(`${process.env.REACT_APP_API_URL}/tasks/order`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(task),
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.statusText;
+  });
+};

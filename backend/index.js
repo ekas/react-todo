@@ -112,6 +112,23 @@ app.delete("/api/tasks/:id", function (req, res) {
   res.status(204).send();
 });
 
+app.post("/api/tasks/order", function (req, res) {
+  if (tasks[req.body.length === 0]) {
+    res.statusMessage = "No Task to reorder";
+    res.status(404).send();
+    return;
+  }
+
+  const taskArr = req.body;
+  let newObj = {};
+  Object.keys(taskArr).map((key) => {
+    newObj[taskArr[key].id] = taskArr[key];
+  });
+  tasks = newObj;
+  res.statusMessage = "Tasks Reordered";
+  res.status(204).send();
+});
+
 app.listen(4000, function () {
   console.log("To-Do app listening on port 4000!");
 });
