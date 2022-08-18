@@ -38,6 +38,11 @@ const TaskBlock = ({
     description,
     status,
   });
+  const [validationErrors, setValidationErrors] = useState({
+    title: false,
+    description: false,
+  });
+
   return isEditing ? (
     <div
       className="task"
@@ -55,6 +60,10 @@ const TaskBlock = ({
         onChange={(e) => setTaskObj({ ...taskObj, title: e.target.value })}
         placeholder="Enter Task Title"
       />
+      <div className="task-title-error">
+        {validationErrors.title && "Title is required"}
+      </div>
+
       <textarea
         id={`${id}-description`}
         className="task-description-input"
@@ -65,12 +74,36 @@ const TaskBlock = ({
         }
         value={taskObj.description}
       />
+      <div className="task-description-error">
+        {validationErrors.description && "Description is required"}
+      </div>
+
       <Button
         cssClasses="item-save-button"
         id={`save-button-${id}`}
         onClick={() => {
-          addUpdateTaskAction(taskObj, "UPDATE");
-          setIsEditing(false);
+          const { title, description } = taskObj;
+          if (title.length > 0 && description.length > 0) {
+            addUpdateTaskAction(taskObj, "UPDATE");
+            setIsEditing(false);
+          }
+
+          if (title.length === 0 && description.length === 0) {
+            setValidationErrors({
+              title: true,
+              description: true,
+            });
+          } else if (description.length === 0) {
+            setValidationErrors({
+              description: true,
+              title: false,
+            });
+          } else {
+            setValidationErrors({
+              title: true,
+              description: false,
+            });
+          }
         }}
       >
         Save Task

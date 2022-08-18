@@ -1,5 +1,5 @@
 import { DroppableProvidedProps } from "react-beautiful-dnd";
-import { addTaskJSON } from "../../helpers/boardHelper";
+import { addTaskJSON, getUniqueID } from "../../helpers/boardHelper";
 import { Task } from "../../models/task";
 import Button from "../Button";
 
@@ -44,7 +44,7 @@ const BoardColumn = ({
           cssClasses="item-add-button"
           id={`add-button-${type}`}
           onClick={() => {
-            addUpdateTaskAction(addTaskJSON, "ADD");
+            addUpdateTaskAction({ ...addTaskJSON, id: getUniqueID() }, "ADD");
           }}
         >
           +

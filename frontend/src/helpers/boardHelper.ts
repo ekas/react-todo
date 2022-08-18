@@ -44,8 +44,10 @@ export const columnJSON: TaskColumn = {
   },
 };
 
+export const getUniqueID = () => uuidv4();
+
 export const addTaskJSON: Task = {
-  id: uuidv4(),
+  id: getUniqueID(),
   title: "New Task",
   description: "Add your description here",
   status: "todo",
