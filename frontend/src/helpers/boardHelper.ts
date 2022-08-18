@@ -11,15 +11,15 @@ export const updateColumnswithTasks = (
 ) => {
   const columnsWithTasks = {
     ...columns,
-    ["todo"]: {
+    todo: {
       ...columns["todo"],
       tasks: tasks.filter((task) => task.status === "todo"),
     },
-    ["inprogress"]: {
+    inprogress: {
       ...columns["inprogress"],
       tasks: tasks.filter((task) => task.status === "inprogress"),
     },
-    ["completed"]: {
+    completed: {
       ...columns["completed"],
       tasks: tasks.filter((task) => task.status === "completed"),
     },

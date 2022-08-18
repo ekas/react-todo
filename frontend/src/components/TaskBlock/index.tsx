@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  DraggableProps,
   DraggableProvidedDraggableProps,
   DraggableProvidedDragHandleProps,
 } from "react-beautiful-dnd";

@@ -31,6 +31,7 @@ const Board = () => {
     if (tasks) {
       updateColumnswithTasks(tasks, columns, setColumns);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tasks]);
 
   const deleteTaskAction = (id: string) => {
