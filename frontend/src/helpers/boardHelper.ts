@@ -41,7 +41,7 @@ export const addUpdateTaskActionHelper = (
         tasksState ? setTasks([task, ...tasksState]) : setTasks([task]);
       })
       .catch((error) => {
-        toast.error(error);
+        toast.error(error.message);
       });
   } else {
     updateTask(task)
@@ -61,7 +61,7 @@ export const addUpdateTaskActionHelper = (
         }
       })
       .catch((error) => {
-        toast.error(error);
+        toast.error(error.message);
       });
   }
 };

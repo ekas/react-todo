@@ -46,7 +46,7 @@ const Board = () => {
           tasks && setTasks(tasks.filter((task) => task.id !== id));
         })
         .catch((error) => {
-          toast.error(error);
+          toast.error(error.message);
         });
     }
   };

@@ -63,6 +63,6 @@ export const onDragEnd = (
   updateTaskOrder(newTasks)
     .then()
     .catch((error) => {
-      toast.error(error);
+      toast.error(error.message);
     });
 };

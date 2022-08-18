@@ -60,13 +60,13 @@ app.post("/api/tasks", function (req, res) {
     !req.body.title ||
     !req.body.status
   ) {
-    res.statusMessage = "Invalid task format";
-    res.status(400).send();
+    const msg = "Invalid task format";
+    res.status(400).json({ msg: msg });
     return;
   }
   if (tasks[req.body.id]) {
-    res.statusMessage = "Conflict. Task already defined";
-    res.status(409).send();
+    const msg = "Task already exists";
+    res.status(409).json({ msg: msg });
     return;
   }
 
@@ -76,16 +76,15 @@ app.post("/api/tasks", function (req, res) {
     status: req.body.status,
     description: req.body.description,
   };
-  res.statusMessage = "New Task Added";
-  res.status(204).send();
+  res.status(204).json();
 });
 
 app.put("/api/tasks/:id", function (req, res) {
   console.log("PUT a new Task", req.params.id, req.body);
 
   if (!tasks[req.params.id]) {
-    res.statusMessage = "Task Not Found";
-    res.status(404).send();
+    const msg = "Task Not Found";
+    res.status(404).json({ msg: msg });
     return;
   }
 
@@ -96,26 +95,24 @@ app.put("/api/tasks/:id", function (req, res) {
     status: status,
     description: description,
   };
-  res.statusMessage = "Task Updated";
-  res.status(204).send();
+  res.status(204).json();
 });
 
 app.delete("/api/tasks/:id", function (req, res) {
   if (!tasks[req.params.id]) {
-    res.statusMessage = "Task Not Found";
-    res.status(404).send();
+    const msg = "Task Not Found";
+    res.status(404).json({ msg: msg });
     return;
   }
 
   delete tasks[req.params.id];
-  res.statusMessage = "Task Deleted";
-  res.status(204).send();
+  res.status(204).json();
 });
 
 app.post("/api/tasks/order", function (req, res) {
   if (tasks[req.body.length === 0]) {
-    res.statusMessage = "No Task to reorder";
-    res.status(404).send();
+    const msg = "No Task to reorder";
+    res.status(404).json({ msg: msg });
     return;
   }
 
@@ -125,8 +122,7 @@ app.post("/api/tasks/order", function (req, res) {
     newObj[taskArr[key].id] = taskArr[key];
   });
   tasks = newObj;
-  res.statusMessage = "Tasks Reordered";
-  res.status(204).send();
+  res.status(204).json();
 });
 
 app.listen(4000, function () {
