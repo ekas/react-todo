@@ -85,6 +85,7 @@ const TaskBlock = ({
           if (title.length > 0 && description.length > 0) {
             addUpdateTaskAction(taskObj, "UPDATE");
             setIsEditing(false);
+            setValidationErrors({ title: false, description: false });
           }
 
           if (title.length === 0 && description.length === 0) {
@@ -97,7 +98,7 @@ const TaskBlock = ({
               description: true,
               title: false,
             });
-          } else {
+          } else if (title.length === 0) {
             setValidationErrors({
               title: true,
               description: false,
@@ -118,24 +119,28 @@ const TaskBlock = ({
       <div className="task-title" title={taskObj.title}>
         {taskObj.title}
       </div>
-      <a
+      <button
         title="Edit Task"
+        id={`edit-button-${id}`}
+        className="task-edit"
         onClick={(e) => {
           e.preventDefault();
           setIsEditing(true);
         }}
       >
-        <img src={EditIcon} alt="Task Edit" className="task-edit" />
-      </a>
-      <a
+        <img src={EditIcon} alt="Task Edit" className="task-edit-img" />
+      </button>
+      <button
         title="Delete Task"
+        id={`delete-button-${id}`}
+        className="task-delete"
         onClick={(e) => {
           e.preventDefault();
           deleteTaskAction(taskObj.id);
         }}
       >
-        <img src={DeleteIcon} alt="Delete Task" className="task-delete" />
-      </a>
+        <img src={DeleteIcon} alt="Delete Task" className="task-delete-img" />
+      </button>
       <div className="task-description">{taskObj.description}</div>
     </div>
   );

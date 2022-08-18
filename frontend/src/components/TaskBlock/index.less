@@ -84,13 +84,17 @@
 
   &-edit {
     top: 0;
-    width: 30px;
     right: 0;
+    border: none;
     padding: 5px;
     cursor: pointer;
     margin-left: 20px;
     position: absolute;
     background-color: rgba(@swatch_3, 0.1);
+
+    &-img {
+      width: 20px;
+    }
 
     &:hover {
       background-color: rgba(@swatch_3, 0.3);
@@ -101,10 +105,16 @@
     top: 0;
     width: 30px;
     right: 30px;
+    border: none;
     padding: 5px;
     cursor: pointer;
     margin-left: 20px;
     position: absolute;
+    background-color: transparent;
+
+    &-img {
+      width: 20px;
+    }
 
     &:hover {
       background-color: rgba(@swatch_3, 0.3);
